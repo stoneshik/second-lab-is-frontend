@@ -9,7 +9,7 @@ export interface ParamsForUpdateCoordinates {
 
 export const updateCoordinates = async (params: ParamsForUpdateCoordinates): Promise<void> => {
     try {
-        await api.put(`/coordinates/${params.id}`, {
+        await api.put(`/api/v1/coordinates/${params.id}`, {
             x: params.x,
             y: params.y,
         });

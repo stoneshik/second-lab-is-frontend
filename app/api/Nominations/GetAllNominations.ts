@@ -11,7 +11,7 @@ export const getWrapperListNomination = async (
     params: ParamsForGetWrapperListNomination
 ): Promise<WrapperListNomination> => {
     try {
-        const response = await api.get("/nominations", { params });
+        const response = await api.get("/api/v1/nominations", { params });
         return response.data as WrapperListNomination;
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {

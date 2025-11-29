@@ -5,7 +5,7 @@ export interface ParamsForDeleteNomination { id: number; }
 
 export const deleteNomination = async ({ id }: ParamsForDeleteNomination): Promise<void> => {
     try {
-        await api.delete(`/nominations/${id}`);
+        await api.delete(`/api/v1/nominations/${id}`);
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {
             // @ts-ignore

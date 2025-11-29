@@ -5,7 +5,7 @@ export interface ParamsForDeleteAlbum { id: number; }
 
 export const deleteAlbum = async ({ id }: ParamsForDeleteAlbum): Promise<void> => {
     try {
-        await api.delete(`/albums/${id}`);
+        await api.delete(`/api/v1/albums/${id}`);
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {
             // @ts-ignore

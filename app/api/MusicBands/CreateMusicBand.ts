@@ -23,7 +23,7 @@ export interface ParamsForCreateMusicBand {
 
 export const createMusicBand = async (params: ParamsForCreateMusicBand): Promise<void> => {
     try {
-        await api.post("/music-bands", params);
+        await api.post("/api/v1/music-bands", params);
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {
             // @ts-ignore

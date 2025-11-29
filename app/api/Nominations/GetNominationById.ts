@@ -8,7 +8,7 @@ export interface ParamsForGetNominationId {
 
 export const getNominationById = async ({ id }: ParamsForGetNominationId): Promise<Nomination> => {
     try {
-        const response = await api.get(`/nominations/${id}`);
+        const response = await api.get(`/api/v1/nominations/${id}`);
         return response.data as Nomination;
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {

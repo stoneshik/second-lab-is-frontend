@@ -11,7 +11,7 @@ export const getWrapperListCoordinates = async (
     params: ParamsForGetWrapperListCoordinates
 ): Promise<WrapperListCoordinates> => {
     try {
-        const response = await api.get("/coordinates", { params });
+        const response = await api.get("/api/v1/coordinates", { params });
         return response.data as WrapperListCoordinates;
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {

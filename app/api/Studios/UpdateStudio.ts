@@ -9,7 +9,7 @@ export interface ParamsForUpdateStudio {
 
 export const updateStudio = async (params: ParamsForUpdateStudio): Promise<void> => {
     try {
-        await api.put(`/studios/${params.id}`, {
+        await api.put(`/api/v1/studios/${params.id}`, {
             name: params.name,
             address: params.address,
         });

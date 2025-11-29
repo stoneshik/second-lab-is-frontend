@@ -11,7 +11,7 @@ export const getWrapperListStudio = async (
     params: ParamsForGetWrapperListStudio
 ): Promise<WrapperListStudio> => {
     try {
-        const response = await api.get("/studios", { params });
+        const response = await api.get("/api/v1/studios", { params });
         return response.data as WrapperListStudio;
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {

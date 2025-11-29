@@ -9,7 +9,7 @@ export interface ParamsForCreateNomination {
 
 export const createNomination = async (params: ParamsForCreateNomination): Promise<void> => {
     try {
-        await api.post("/nominations", {
+        await api.post("/api/v1/nominations", {
             musicBandId: params.musicBandId,
             musicGenre: params.musicGenre,
         });

@@ -8,7 +8,7 @@ export interface ParamsForCreateAlbum {
 
 export const createAlbum = async (params: ParamsForCreateAlbum): Promise<void> => {
     try {
-        await api.post("/albums", {
+        await api.post("/api/v1/albums", {
             name: params.name,
             length: params.length,
         });

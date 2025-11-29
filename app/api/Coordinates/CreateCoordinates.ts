@@ -8,7 +8,7 @@ export interface ParamsForCreateCoordinates {
 
 export const createCoordinates = async (params: ParamsForCreateCoordinates): Promise<void> => {
     try {
-        await api.post("/coordinates", {
+        await api.post("/api/v1/coordinates", {
             x: params.x,
             y: params.y,
         });

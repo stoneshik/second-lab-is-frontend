@@ -45,7 +45,7 @@ export const getWrapperListMusicBand = async ({
             const sortParam = sortNameField + "," + sortOrder;
             params.sort = sortParam;
         }
-        const response = await api.get("/music-bands", { params });
+        const response = await api.get("/api/v1/music-bands", { params });
         return response.data as WrapperListMusicBand;
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {

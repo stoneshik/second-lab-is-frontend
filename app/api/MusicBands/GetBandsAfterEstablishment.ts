@@ -8,7 +8,7 @@ export const getBandsAfterEstablishment = async (
     params: ParamsForGetBandsAfterEstablishment
 ): Promise<MusicBand[]> => {
     try {
-        const response = await api.get("/music-bands/after-establishment", { params });
+        const response = await api.get("/api/v1/music-bands/after-establishment", { params });
         return response.data as MusicBand[];
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {

@@ -6,7 +6,7 @@ export interface ParamsForGetAlbumId { id: number; }
 
 export const getAlbumById = async ({ id }: ParamsForGetAlbumId): Promise<Album> => {
     try {
-        const response = await api.get(`/albums/${id}`);
+        const response = await api.get(`/api/v1/albums/${id}`);
         return response.data as Album;
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {

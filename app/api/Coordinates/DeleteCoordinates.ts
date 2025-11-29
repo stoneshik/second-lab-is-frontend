@@ -5,7 +5,7 @@ export interface ParamsForUpdateCoordinates { id: number; }
 
 export const deleteCoordinates = async ({ id }: ParamsForUpdateCoordinates): Promise<void> => {
     try {
-        await api.delete(`/coordinates/${id}`);
+        await api.delete(`/api/v1/coordinates/${id}`);
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {
             // @ts-ignore

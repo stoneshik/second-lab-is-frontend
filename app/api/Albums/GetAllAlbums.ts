@@ -11,7 +11,7 @@ export const getWrapperListAlbum = async (
     params: ParamsForGetWrapperListAlbum
 ): Promise<WrapperListAlbum> => {
     try {
-        const response = await api.get("/albums", { params });
+        const response = await api.get("/api/v1/albums", { params });
         return response.data as WrapperListAlbum;
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {

@@ -7,7 +7,7 @@ export const deleteOneByEstablishmentDate = async (
     params: ParamsForDeleteOneByEstablishmentDate
 ): Promise<void> => {
     try {
-        await api.delete("/music-bands/by-establishment", { params });
+        await api.delete("/api/v1/music-bands/by-establishment", { params });
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {
             // @ts-ignore

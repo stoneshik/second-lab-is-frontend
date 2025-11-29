@@ -8,7 +8,7 @@ export interface ParamsForCreateStudio {
 
 export const createStudio = async (params: ParamsForCreateStudio): Promise<void> => {
     try {
-        await api.post("/studios", {
+        await api.post("/api/v1/studios", {
             name: params.name,
             address: params.address,
         });

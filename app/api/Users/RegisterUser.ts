@@ -1,11 +1,19 @@
 import { api } from "~/lib/axios";
 import { isErrorMessage } from "~/types/ErrorMessage";
-import type { MusicBand } from "~/types/musicBand/MusicBand";
 
-export const getOneWithMinId = async (): Promise<MusicBand> => {
+export interface ParamsForRegisterUser {
+    login: string;
+    role: string[];
+    password: string;
+}
+
+export const registerUser = async (params: ParamsForRegisterUser): Promise<void> => {
     try {
-        const response = await api.get("/api/v1/music-bands/min-id");
-        return response.data as MusicBand;
+        await api.post("/auth/register", {
+            login: params.login,
+            role: params.role,
+            password: params.password,
+        });
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {
             // @ts-ignore

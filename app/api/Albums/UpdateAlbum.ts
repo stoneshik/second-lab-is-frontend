@@ -9,7 +9,7 @@ export interface ParamsForUpdateAlbum {
 
 export const updateAlbum = async (params: ParamsForUpdateAlbum): Promise<void> => {
     try {
-        await api.put(`/albums/${params.id}`, {
+        await api.put(`/api/v1/albums/${params.id}`, {
             name: params.name,
             length: params.length,
         });

@@ -24,7 +24,7 @@ export interface ParamsForUpdateMusicBand {
 
 export const updateMusicBand = async (params: ParamsForUpdateMusicBand): Promise<void> => {
     try {
-        await api.put(`/music-bands/${params.id}`, {
+        await api.put(`/api/v1/music-bands/${params.id}`, {
             name: params.name,
             coordinates: params.coordinates,
             coordinatesId: params.coordinatesId,

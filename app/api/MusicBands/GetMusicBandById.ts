@@ -6,7 +6,7 @@ export interface ParamsForGetMusicBandId { id: number; }
 
 export const getMusicBandById = async ({ id }: ParamsForGetMusicBandId): Promise<MusicBand> => {
     try {
-        const response = await api.get(`/music-bands/${id}`);
+        const response = await api.get(`/api/v1/music-bands/${id}`);
         return response.data as MusicBand;
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {

@@ -6,7 +6,7 @@ export interface ParamsForGetCoordinatesId { id: number; }
 
 export const getCoordinatesById = async ({ id }: ParamsForGetCoordinatesId): Promise<Coordinates> => {
     try {
-        const response = await api.get(`/coordinates/${id}`);
+        const response = await api.get(`/api/v1/coordinates/${id}`);
         return response.data as Coordinates;
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {

@@ -5,7 +5,7 @@ export interface ParamsForAddSingleToBand { id: number; }
 
 export const addSingleToBand = async ({ id }: ParamsForAddSingleToBand): Promise<void> => {
     try {
-        await api.post(`/music-bands/${id}/singles`);
+        await api.post(`/api/v1/music-bands/${id}/singles`);
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {
             // @ts-ignore
