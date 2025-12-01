@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { useCallback, useState, type JSX } from "react";
-import { loginUser } from "~/api/Users/LoginUser";
-import type { ParamsForRegisterUser } from "~/api/Users/RegisterUser";
+import { registerUser, type ParamsForRegisterUser } from "~/api/Users/RegisterUser";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import styles from "./RegisterForm.module.scss";
@@ -32,11 +31,11 @@ export function RegisterForm(): JSX.Element {
         }
         const LOGIN_REGEX = /^\w{4,20}$/;
         const PASSWORD_REGEX = /^\w{4,30}$/;
-        if (LOGIN_REGEX.test(login)) {
+        if (!LOGIN_REGEX.test(login)) {
             setErrorMessage("Логин может состоять только из латинских символов, цифр и символов нижнего подчеркивания");
             return false;
         }
-        if (PASSWORD_REGEX.test(password)) {
+        if (!PASSWORD_REGEX.test(password)) {
             setErrorMessage("Пароль может состоять только из латинских символов, цифр и символов нижнего подчеркивания");
             return false;
         }
@@ -55,10 +54,10 @@ export function RegisterForm(): JSX.Element {
                     role: null,
                     password: password.trim(),
                 };
-                await loginUser(params);
+                await registerUser(params);
                 setSuccessMessage("Успешная регистрация");
                 setErrorMessage("");
-                setTimeout(() => globalThis.location.assign("/"), 2000);
+                setTimeout(() => globalThis.location.assign("/login"), 2000);
             } catch (error) {
                 if (import.meta.env.DEV) { console.log(error); }
                 if (isErrorMessage(error)) {

@@ -31,11 +31,11 @@ export function LoginForm(): JSX.Element {
         }
         const LOGIN_REGEX = /^\w{4,20}$/;
         const PASSWORD_REGEX = /^\w{4,30}$/;
-        if (LOGIN_REGEX.test(login)) {
+        if (!LOGIN_REGEX.test(login)) {
             setErrorMessage("Логин может состоять только из латинских символов, цифр и символов нижнего подчеркивания");
             return false;
         }
-        if (PASSWORD_REGEX.test(password)) {
+        if (!PASSWORD_REGEX.test(password)) {
             setErrorMessage("Пароль может состоять только из латинских символов, цифр и символов нижнего подчеркивания");
             return false;
         }

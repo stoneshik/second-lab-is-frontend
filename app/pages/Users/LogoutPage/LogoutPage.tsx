@@ -12,8 +12,8 @@ export default function LogoutPage(): JSX.Element {
     const load = useCallback(
         async () => {
             try {
-                const data = await logoutUser();
-                setSuccessMessage(data.message);
+                await logoutUser();
+                setSuccessMessage("Выход успешен");
                 setErrorMessage("");
                 setTimeout(() => globalThis.location.assign("/"), 100);
             } catch (error) {
