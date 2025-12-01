@@ -32,8 +32,11 @@ export function HeaderWithoutAuth(): JSX.Element {
                 </button>
 
                 <nav className={`header__nav ${open ? "header__nav--open" : ""}`}>
-                    <NavLink to="/" className={linkClass} onClick={closeMenu} end>
-                        Главная
+                    <NavLink to="/login" className={linkClass} onClick={closeMenu} end>
+                        Вход
+                    </NavLink>
+                    <NavLink to="/register" className={linkClass} onClick={closeMenu} end>
+                        Регистрация
                     </NavLink>
                 </nav>
             </div>
