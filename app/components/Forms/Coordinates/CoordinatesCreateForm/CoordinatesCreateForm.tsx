@@ -1,10 +1,10 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, type JSX } from "react";
 import { createCoordinates, type ParamsForCreateCoordinates } from "~/api/Coordinates/CreateCoordinates";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import styles from "./CoordinatesCreateForm.module.scss";
 
-export function CoordinatesCreateForm() {
+export function CoordinatesCreateForm(): JSX.Element {
     const [x, setX] = useState<number>(0);
     const [y, setY] = useState<number>(0);
     const [loading, setLoading] = useState(false);

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type JSX } from "react";
 import { updateStudio, type ParamsForUpdateStudio } from "~/api/Studios/UpdateStudio";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
@@ -7,7 +7,7 @@ import styles from "./StudioEditForm.module.scss";
 
 type Props = { studio: Studio; };
 
-export function StudioEditForm({ studio }: Readonly<Props>) {
+export function StudioEditForm({ studio }: Readonly<Props>): JSX.Element {
     const [name, setName] = useState<string>("");
     const [address, setAddress] = useState<string>("");
     const [loading, setLoading] = useState(false);

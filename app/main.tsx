@@ -21,6 +21,9 @@ import NominationByIdPage from "./pages/Nominations/NominationByIdPage/Nominatio
 import NominationsListPage from "./pages/Nominations/NominationsListPage/NominationsListPage";
 
 import "~/styles/globals.scss";
+import LoginPage from "./pages/Users/LoginPage/LoginPage";
+import LogoutPage from "./pages/Users/LogoutPage/LogoutPage";
+import RegisterPage from "./pages/Users/RegisterPage/RegisterPage";
 
 const root = createRoot(document.getElementById("root")!);
 
@@ -29,22 +32,26 @@ root.render(
         <BrowserRouter>
         <Routes>
             <Route path="/" element={<App />} errorElement={<ErrorBoundary />}>
-            <Route index element={<HomePage />} />
+                <Route index element={<HomePage />} />
 
-            <Route path="music-bands" element={<MusicBandsListPage />} />
-            <Route path="music-bands/:id" element={<MusicBandByIdPage />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="register" element={<RegisterPage />} />
+                <Route path="logout" element={<LogoutPage />} />
 
-            <Route path="coordinates" element={<CoordinatesListPage />} />
-            <Route path="coordinates/:id" element={<CoordinateByIdPage />} />
+                <Route path="music-bands" element={<MusicBandsListPage />} />
+                <Route path="music-bands/:id" element={<MusicBandByIdPage />} />
 
-            <Route path="albums" element={<AlbumsListPage />} />
-            <Route path="albums/:id" element={<AlbumByIdPage />} />
+                <Route path="coordinates" element={<CoordinatesListPage />} />
+                <Route path="coordinates/:id" element={<CoordinateByIdPage />} />
 
-            <Route path="studios" element={<StudiosListPage />} />
-            <Route path="studios/:id" element={<StudioByIdPage />} />
+                <Route path="albums" element={<AlbumsListPage />} />
+                <Route path="albums/:id" element={<AlbumByIdPage />} />
 
-            <Route path="nominations" element={<NominationsListPage />} />
-            <Route path="nominations/:id" element={<NominationByIdPage />} />
+                <Route path="studios" element={<StudiosListPage />} />
+                <Route path="studios/:id" element={<StudioByIdPage />} />
+
+                <Route path="nominations" element={<NominationsListPage />} />
+                <Route path="nominations/:id" element={<NominationByIdPage />} />
             </Route>
         </Routes>
         </BrowserRouter>

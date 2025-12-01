@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type JSX } from "react";
 import { updateCoordinates, type ParamsForUpdateCoordinates } from "~/api/Coordinates/UpdateCoordinates";
 import { Button } from "~/components/UI/Button/Button";
 import type { Coordinates } from "~/types/coordinates/Coordinates";
@@ -7,7 +7,7 @@ import styles from "./CoordinatesEditForm.module.scss";
 
 type Props = { coordinates: Coordinates; };
 
-export function CoordinatesEditForm({ coordinates }: Readonly<Props>) {
+export function CoordinatesEditForm({ coordinates }: Readonly<Props>): JSX.Element {
     const [x, setX] = useState<number>(0);
     const [y, setY] = useState<number>(0);
     const [loading, setLoading] = useState(false);

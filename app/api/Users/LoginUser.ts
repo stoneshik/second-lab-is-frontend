@@ -8,7 +8,7 @@ export interface ParamsForLoginUser {
     password: string;
 }
 
-export const loginUser = async (params: ParamsForLoginUser): Promise<JwtResponseDto> => {
+export const loginUser = async (params: ParamsForLoginUser): Promise<void> => {
     try {
         const response = await api.post("/auth/login", {
             login: params.login,
@@ -16,7 +16,6 @@ export const loginUser = async (params: ParamsForLoginUser): Promise<JwtResponse
         });
         const responseData: JwtResponseDto = response.data;
         tokenService.set(responseData.token);
-        return responseData;
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {
             // @ts-ignore

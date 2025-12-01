@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, type JSX } from "react";
 import { createNomination, type ParamsForCreateNomination } from "~/api/Nominations/CreateNomination";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
@@ -6,7 +6,7 @@ import { MusicGenre, MusicGenreDictionary } from "~/types/MusicGenre";
 import { MusicBandSelect } from "../../MusicBands/MusicBandSelect/MusicBandSelect";
 import styles from "./NominationCreateForm.module.scss";
 
-export function NominationCreateForm() {
+export function NominationCreateForm(): JSX.Element {
     const [musicBandId, setMusicBandId] = useState<number>(0);
     const [musicBandName, setMusicBandName] = useState<string>("");
     const [musicGenre, setMusicGenre] = useState<MusicGenre>(MusicGenre.BRIT_POP);

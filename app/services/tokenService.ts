@@ -4,10 +4,10 @@ export const tokenService = {
     get(): string | null {
         return localStorage.getItem(ACCESS_TOKEN_KEY);
     },
-    set(token: string) {
+    set(token: string): void {
         localStorage.setItem(ACCESS_TOKEN_KEY, token);
     },
-    remove() {
+    remove(): void {
         localStorage.removeItem(ACCESS_TOKEN_KEY);
     }
 };

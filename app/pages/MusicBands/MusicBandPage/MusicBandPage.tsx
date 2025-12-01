@@ -5,6 +5,7 @@ import type { MusicBand } from "~/types/musicBand/MusicBand";
 import { deleteMusicBand } from "~/api/MusicBands/DeleteMusicBand";
 import { getMusicBandById, type ParamsForGetMusicBandId } from "~/api/MusicBands/GetMusicBandById";
 import { MusicBandEditForm } from "~/components/Forms/MusicBands/MusicBandEditForm/MusicBandEditForm";
+import { Header } from "~/components/Header/Header";
 import { MusicBandTable } from "~/components/Tables/MusicBand/MusicBandTable/MusicBandTable";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
@@ -71,6 +72,8 @@ export default function MusicBandPage(): JSX.Element {
     };
 
     return (
+        <>
+        <Header />
         <div className={styles.wrapper}>
             <h1>Музыкальная группа</h1>
             <div className={styles.error}>{errorMessage}</div>
@@ -81,5 +84,6 @@ export default function MusicBandPage(): JSX.Element {
                 <Button className={styles.delete} onClick={handlingDelete} textButton={"❌ Удаление музыкальной группы"} /> }
             {successMessage && <div className="success">{successMessage}</div>}
         </div>
+        </>
     );
 }

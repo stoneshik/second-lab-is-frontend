@@ -1,11 +1,11 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, type JSX } from "react";
 import { addSingleToBand, type ParamsForAddSingleToBand } from "~/api/MusicBands/AddSingleToBand";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import { MusicBandSelect } from "../../MusicBands/MusicBandSelect/MusicBandSelect";
 import styles from "./AddSingleToBandForm.module.scss";
 
-export function AddSingleToBandForm() {
+export function AddSingleToBandForm(): JSX.Element {
     const [musicBandId, setMusicBandId] = useState<number>(0);
     const [musicBandName, setMusicBandName] = useState<string>("");
     const [loading, setLoading] = useState(false);

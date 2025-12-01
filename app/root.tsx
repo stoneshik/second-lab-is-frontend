@@ -5,12 +5,9 @@ import "./styles/globals.scss";
 
 export default function App(): JSX.Element {
     return (
-        <>
-        <Header />
         <main>
             <Outlet />
         </main>
-        </>
     );
 }
 

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, type JSX } from "react";
 import { createMusicBand, type ParamsForCreateMusicBand } from "~/api/MusicBands/CreateMusicBand";
 import { Button } from "~/components/UI/Button/Button";
 import type { AlbumRequestCreate } from "~/types/album/AlbumRequestCreate";
@@ -11,7 +11,7 @@ import { CoordinatesSelect } from "../../Coordinates/CoordinatesSelect/Coordinat
 import { StudioSelect } from "../../Studios/StudioSelect/StudioSelect";
 import styles from "./MusicBandCreateForm.module.scss";
 
-export function MusicBandCreateForm() {
+export function MusicBandCreateForm(): JSX.Element {
     const [name, setName] = useState<string>("");
 
     const [coordinatesX, setCoordinatesX] = useState<number | null>(null);

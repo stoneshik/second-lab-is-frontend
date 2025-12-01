@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type JSX } from "react";
 
 import { getWrapperListCoordinates, type ParamsForGetWrapperListCoordinates } from "~/api/Coordinates/GetAllCoordinates";
 import { CoordinatesTableSelect } from "~/components/Tables/Coordinates/CoordinatesTableSelect/CoordinatesTableSelect";
@@ -15,7 +15,7 @@ interface CoordinatesSelectProps {
     ) => void;
 }
 
-export function CoordinatesSelect({ onSelectCoordinates }: Readonly<CoordinatesSelectProps>) {
+export function CoordinatesSelect({ onSelectCoordinates }: Readonly<CoordinatesSelectProps>): JSX.Element {
     const [wrapperListCoordinates, setWrapperListCoordinates] = useState<WrapperListCoordinates | null>(null);
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [page, setPage] = useState<number>(0);

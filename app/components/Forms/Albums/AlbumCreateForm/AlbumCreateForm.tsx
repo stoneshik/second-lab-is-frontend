@@ -1,11 +1,11 @@
 import clsx from "clsx";
-import { useCallback, useState } from "react";
+import { useCallback, useState, type JSX } from "react";
 import { createAlbum, type ParamsForCreateAlbum } from "~/api/Albums/CreateAlbum";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import styles from "./AlbumCreateForm.module.scss";
 
-export function AlbumCreateForm() {
+export function AlbumCreateForm(): JSX.Element {
     const [name, setName] = useState<string>("");
     const [length, setLength] = useState<number>(1);
     const [loading, setLoading] = useState(false);

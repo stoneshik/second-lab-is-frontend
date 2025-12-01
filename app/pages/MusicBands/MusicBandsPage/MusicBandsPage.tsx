@@ -5,9 +5,12 @@ import { GetBandsAfterEstablishmentForm } from "~/components/Forms/MusicBands/Ge
 import { GetOneWithMinIdForm } from "~/components/Forms/MusicBands/GetOneWithMinIdForm/GetOneWithMinIdForm";
 import { MusicBandCreateForm } from "~/components/Forms/MusicBands/MusicBandCreateForm/MusicBandCreateForm";
 import styles from "./MusicBandsPage.module.scss";
+import { Header } from "~/components/Header/Header";
 
 export default function MusicBandsPage(): JSX.Element {
     return (
+        <>
+        <Header />
         <div className={styles.wrapper}>
             <MusicBandCreateForm />
             <div className={styles.formWrapper}>
@@ -17,5 +20,6 @@ export default function MusicBandsPage(): JSX.Element {
                 <AddSingleToBandForm />
             </div>
         </div>
+        </>
     );
 }

@@ -4,7 +4,7 @@ import type { MessageResponseDto } from "~/types/MessageResponseDto";
 
 export interface ParamsForRegisterUser {
     login: string;
-    role: string[];
+    role: string[] | null;
     password: string;
 }
 

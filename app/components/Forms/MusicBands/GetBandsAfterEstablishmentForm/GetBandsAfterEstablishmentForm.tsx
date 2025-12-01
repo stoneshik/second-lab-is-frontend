@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, type JSX } from "react";
 import { getBandsAfterEstablishment, type ParamsForGetBandsAfterEstablishment } from "~/api/MusicBands/GetBandsAfterEstablishment";
 import { MusicBandTable } from "~/components/Tables/MusicBand/MusicBandTable/MusicBandTable";
 import { Button } from "~/components/UI/Button/Button";
@@ -6,7 +6,7 @@ import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/Err
 import type { MusicBand } from "~/types/musicBand/MusicBand";
 import styles from "./GetBandsAfterEstablishmentForm.module.scss";
 
-export function GetBandsAfterEstablishmentForm() {
+export function GetBandsAfterEstablishmentForm(): JSX.Element {
     const [musicBands, setMusicBands] = useState<MusicBand[] | null>(null);
     const [establishmentDate, setEstablishmentDate] = useState<string>("");
     const [loading, setLoading] = useState(false);

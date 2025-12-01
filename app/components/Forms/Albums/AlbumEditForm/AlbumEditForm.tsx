@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type JSX } from "react";
 import { updateAlbum, type ParamsForUpdateAlbum } from "~/api/Albums/UpdateAlbum";
 import { Button } from "~/components/UI/Button/Button";
 import type { Album } from "~/types/album/Album";
@@ -8,7 +8,7 @@ import styles from "./AlbumEditForm.module.scss";
 
 type Props = { album: Album; };
 
-export function AlbumEditForm({ album }: Readonly<Props>) {
+export function AlbumEditForm({ album }: Readonly<Props>): JSX.Element {
     const [name, setName] = useState<string>("");
     const [length, setLength] = useState<number>(1);
     const [loading, setLoading] = useState(false);

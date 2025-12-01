@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import styles from "./Button.module.scss";
 
 interface ButtonProps {
@@ -9,7 +10,7 @@ interface ButtonProps {
 
 export const Button = (
     {className, onClick, textButton, disabled}: ButtonProps
-) => {
+): JSX.Element => {
     return (
         <button
             className={className ?? styles.button}

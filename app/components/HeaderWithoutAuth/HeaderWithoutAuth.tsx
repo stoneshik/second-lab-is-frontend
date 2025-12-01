@@ -1,8 +1,8 @@
 import { useState, type JSX } from "react";
 import { NavLink } from "react-router-dom";
-import "./Header.scss";
+import "./HeaderWithoutAuth.scss";
 
-export function Header(): JSX.Element {
+export function HeaderWithoutAuth(): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const toggleMenu = () => setOpen((v) => !v);
@@ -34,24 +34,6 @@ export function Header(): JSX.Element {
                 <nav className={`header__nav ${open ? "header__nav--open" : ""}`}>
                     <NavLink to="/" className={linkClass} onClick={closeMenu} end>
                         Главная
-                    </NavLink>
-                    <NavLink to="/music-bands" className={linkClass} onClick={closeMenu} id="music-bands-nav">
-                        Муз. группы
-                    </NavLink>
-                    <NavLink to="/coordinates" className={linkClass} onClick={closeMenu}>
-                        Координаты
-                    </NavLink>
-                    <NavLink to="/albums" className={linkClass} onClick={closeMenu}>
-                        Альбомы
-                    </NavLink>
-                    <NavLink to="/studios" className={linkClass} onClick={closeMenu}>
-                        Студии
-                    </NavLink>
-                    <NavLink to="/nominations" className={linkClass} onClick={closeMenu}>
-                        Номинации
-                    </NavLink>
-                    <NavLink to="/logout" className={linkClass} onClick={closeMenu}>
-                        Выйти
                     </NavLink>
                 </nav>
             </div>

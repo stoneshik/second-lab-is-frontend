@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { deleteStudio } from "~/api/Studios/DeleteStudio";
 import { getStudioById, type ParamsForGetStudioId } from "~/api/Studios/GetStudioById";
 import { StudioEditForm } from "~/components/Forms/Studios/StudioEditForm/StudioEditForm";
+import { Header } from "~/components/Header/Header";
 import { StudioTable } from "~/components/Tables/Studio/StudioTable/StudioTable";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
@@ -69,6 +70,8 @@ export default function StudioByIdPage(): JSX.Element {
     };
 
     return (
+        <>
+        <Header />
         <div className={styles.wrapper}>
             <h1>Студия</h1>
             <div className={styles.error}>{errorMessage}</div>
@@ -78,5 +81,6 @@ export default function StudioByIdPage(): JSX.Element {
             {studio && <Button className={styles.delete} onClick={handlingDelete} textButton={"❌ Удаление студии"} /> }
             {successMessage && <div className="success">{successMessage}</div>}
         </div>
+        </>
     );
 }

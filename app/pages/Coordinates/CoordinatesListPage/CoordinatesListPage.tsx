@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, type JSX } from "react";
 
 import { getWrapperListCoordinates, type ParamsForGetWrapperListCoordinates } from "~/api/Coordinates/GetAllCoordinates";
 import { CoordinatesCreateForm } from "~/components/Forms/Coordinates/CoordinatesCreateForm/CoordinatesCreateForm";
+import { Header } from "~/components/Header/Header";
 import { CoordinatesTable } from "~/components/Tables/Coordinates/CoordinatesTable/CoordinatesTable";
 import { Button } from "~/components/UI/Button/Button";
 import type { WrapperListCoordinates } from "~/types/coordinates/WrapperListCoordinates";
@@ -57,6 +58,8 @@ export default function CoordinatesListPage(): JSX.Element {
     const handleNextPage = (): void => setPage((p) => Math.min((totalPages - 1), p + 1));
 
     return (
+        <>
+        <Header />
         <div className={styles.wrapper}>
             <h1>Координаты муз. групп</h1>
             <h2>Всего найдено: {totalElements}</h2>
@@ -89,5 +92,6 @@ export default function CoordinatesListPage(): JSX.Element {
 
             {coordinates && <CoordinatesCreateForm />}
         </div>
+        </>
     );
 }

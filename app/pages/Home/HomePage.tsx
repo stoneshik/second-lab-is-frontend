@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, type JSX } from "react";
 
 import type { ParamsForGetWrapperListMusicBand } from "~/api/MusicBands/GetAllMusicBands";
 import { getWrapperListMusicBand } from "~/api/MusicBands/GetAllMusicBands";
+import { Header } from "~/components/Header/Header";
 import { MusicBandTable } from "~/components/Tables/MusicBand/MusicBandTable/MusicBandTable";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
@@ -102,6 +103,8 @@ export default function HomePage(): JSX.Element {
     const handleNextPage = (): void => setPage((p) => Math.min((totalPages - 1), p + 1));
 
     return (
+        <>
+        <Header />
         <div className={styles.wrapper}>
             <h1>Музыкальные группы</h1>
             <h2>Всего найдено: {totalElements}</h2>
@@ -215,5 +218,6 @@ export default function HomePage(): JSX.Element {
                 <Button onClick={handleNextPage} textButton={"Вперед"} disabled={page >= totalPages - 1}/>
             </div>
         </div>
+        </>
     );
 }

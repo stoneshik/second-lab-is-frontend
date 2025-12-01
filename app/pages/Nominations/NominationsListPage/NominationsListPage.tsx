@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, type JSX } from "react";
 
 import { getWrapperListNomination, type ParamsForGetWrapperListNomination } from "~/api/Nominations/GetAllNominations";
 import { NominationCreateForm } from "~/components/Forms/Nominations/NominationCreateForm/NominationCreateForm";
+import { Header } from "~/components/Header/Header";
 import { NominationTable } from "~/components/Tables/Nomination/NominationTable/NominationTable";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
@@ -57,6 +58,8 @@ export default function NominationsListPage(): JSX.Element {
     const handleNextPage = (): void => setPage((p) => Math.min((totalPages - 1), p + 1));
 
     return (
+        <>
+        <Header />
         <div className={styles.wrapper}>
             <h1>Номинации муз. групп по жанрам</h1>
             <h2>Всего найдено: {totalElements}</h2>
@@ -89,5 +92,6 @@ export default function NominationsListPage(): JSX.Element {
 
             <NominationCreateForm />
         </div>
+        </>
     );
 }

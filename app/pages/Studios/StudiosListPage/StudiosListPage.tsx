@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, type JSX } from "react";
 
 import { getWrapperListStudio, type ParamsForGetWrapperListStudio } from "~/api/Studios/GetAllStudios";
 import { StudioCreateForm } from "~/components/Forms/Studios/StudioCreateForm/StudioCreateForm";
+import { Header } from "~/components/Header/Header";
 import { StudioTable } from "~/components/Tables/Studio/StudioTable/StudioTable";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
@@ -57,6 +58,8 @@ export default function StudiosListPage(): JSX.Element {
     const handleNextPage = (): void => setPage((p) => Math.min((totalPages - 1), p + 1));
 
     return (
+        <>
+        <Header />
         <div className={styles.wrapper}>
             <h1>Студии</h1>
             <h2>Всего найдено: {totalElements}</h2>
@@ -87,5 +90,6 @@ export default function StudiosListPage(): JSX.Element {
 
             {studios && <StudioCreateForm />}
         </div>
+        </>
     );
 }

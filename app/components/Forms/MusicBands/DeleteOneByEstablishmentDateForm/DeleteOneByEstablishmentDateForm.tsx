@@ -1,10 +1,10 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, type JSX } from "react";
 import { deleteOneByEstablishmentDate, type ParamsForDeleteOneByEstablishmentDate } from "~/api/MusicBands/DeleteOneByEstablishmentDate";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import styles from "./DeleteOneByEstablishmentDateForm.module.scss";
 
-export function DeleteOneByEstablishmentDateForm() {
+export function DeleteOneByEstablishmentDateForm(): JSX.Element {
     const [establishmentDate, setEstablishmentDate] = useState<string>("");
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string>("");

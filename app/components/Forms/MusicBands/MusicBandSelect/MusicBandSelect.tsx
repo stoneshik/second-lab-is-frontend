@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type JSX } from "react";
 
 import type { ParamsForGetWrapperListMusicBand } from "~/api/MusicBands/GetAllMusicBands";
 import { getWrapperListMusicBand } from "~/api/MusicBands/GetAllMusicBands";
@@ -14,7 +14,7 @@ interface MusicBandSelectProps {
     onSelectMusicBand: (newMusicBandId: number, newMusicBandName: string) => void;
 }
 
-export function MusicBandSelect({ onSelectMusicBand }: Readonly<MusicBandSelectProps>) {
+export function MusicBandSelect({ onSelectMusicBand }: Readonly<MusicBandSelectProps>): JSX.Element {
     const [wrapperListMusicBand, setWrapperListMusicBand] = useState<WrapperListMusicBand | null>(null);
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [page, setPage] = useState<number>(0);

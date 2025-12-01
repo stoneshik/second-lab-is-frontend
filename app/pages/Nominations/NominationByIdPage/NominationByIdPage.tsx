@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { deleteNomination } from "~/api/Nominations/DeleteNomination";
 import { getNominationById, type ParamsForGetNominationId } from "~/api/Nominations/GetNominationById";
+import { Header } from "~/components/Header/Header";
 import { NominationTable } from "~/components/Tables/Nomination/NominationTable/NominationTable";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
@@ -68,6 +69,8 @@ export default function NominationByIdPage(): JSX.Element {
     };
 
     return (
+        <>
+        <Header />
         <div className={styles.wrapper}>
             <h1>Номинация муз. группы</h1>
             <div className={styles.error}>{errorMessage}</div>
@@ -77,5 +80,6 @@ export default function NominationByIdPage(): JSX.Element {
                 <Button className={styles.delete} onClick={handlingDelete} textButton={"❌ Удаление номинации"} /> }
             {successMessage && <div className="success">{successMessage}</div>}
         </div>
+        </>
     );
 }

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { deleteCoordinates } from "~/api/Coordinates/DeleteCoordinates";
 import { getCoordinatesById, type ParamsForGetCoordinatesId } from "~/api/Coordinates/GetCoordinatesById";
 import { CoordinatesEditForm } from "~/components/Forms/Coordinates/CoordinatesEditForm/CoordinatesEditForm";
+import { Header } from "~/components/Header/Header";
 import { CoordinatesTable } from "~/components/Tables/Coordinates/CoordinatesTable/CoordinatesTable";
 import { Button } from "~/components/UI/Button/Button";
 import type { Coordinates } from "~/types/coordinates/Coordinates";
@@ -69,6 +70,8 @@ export default function CoordinatesByIdPage(): JSX.Element {
     };
 
     return (
+        <>
+        <Header />
         <div className={styles.wrapper}>
             <h1>Координаты муз. групп</h1>
             <div className={styles.error}>{errorMessage}</div>
@@ -79,5 +82,6 @@ export default function CoordinatesByIdPage(): JSX.Element {
                 <Button className={styles.delete} onClick={handlingDelete} textButton={"❌ Удаление координат"} /> }
             {successMessage && <div className="success">{successMessage}</div>}
         </div>
+        </>
     );
 }

@@ -9,6 +9,7 @@ import { Button } from "~/components/UI/Button/Button";
 import type { Album } from "~/types/album/Album";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import styles from "./AlbumByIdPage.module.scss";
+import { Header } from "~/components/Header/Header";
 
 export default function AlbumByIdPage(): JSX.Element {
     const { id } = useParams<{ id: string }>();
@@ -64,6 +65,8 @@ export default function AlbumByIdPage(): JSX.Element {
     };
 
     return (
+        <>
+        <Header />
         <div className={styles.wrapper}>
             <h1>Музыкальный альбом</h1>
             <div className={styles.error}>{errorMessage}</div>
@@ -75,5 +78,6 @@ export default function AlbumByIdPage(): JSX.Element {
                 textButton={"❌ Удаление музыкального альбома"} />
             {successMessage && <div className="success">{successMessage}</div>}
         </div>
+        </>
     );
 }

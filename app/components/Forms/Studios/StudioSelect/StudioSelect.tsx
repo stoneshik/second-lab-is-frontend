@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type JSX } from "react";
 
 import { getWrapperListStudio, type ParamsForGetWrapperListStudio } from "~/api/Studios/GetAllStudios";
 import { StudioTableSelect } from "~/components/Tables/Studio/StudioTableSelect/StudioTableSelect";
@@ -15,7 +15,7 @@ interface StudioSelectProps {
     ) => void;
 }
 
-export function StudioSelect({ onSelectStudio }: Readonly<StudioSelectProps>) {
+export function StudioSelect({ onSelectStudio }: Readonly<StudioSelectProps>): JSX.Element {
     const [wrapperListStudio, setWrapperListStudio] = useState<WrapperListStudio | null>(null);
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [page, setPage] = useState<number>(0);

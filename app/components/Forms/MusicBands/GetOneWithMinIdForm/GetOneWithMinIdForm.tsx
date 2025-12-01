@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, type JSX } from "react";
 import { getOneWithMinId } from "~/api/MusicBands/GetOneWithMinId";
 import { MusicBandTable } from "~/components/Tables/MusicBand/MusicBandTable/MusicBandTable";
 import { Button } from "~/components/UI/Button/Button";
@@ -6,7 +6,7 @@ import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/Err
 import type { MusicBand } from "~/types/musicBand/MusicBand";
 import styles from "./GetOneWithMinIdForm.module.scss";
 
-export function GetOneWithMinIdForm() {
+export function GetOneWithMinIdForm(): JSX.Element {
     const [musicBand, setMusicBand] = useState<MusicBand | null>(null);
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string>("");

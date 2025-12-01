@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type JSX } from "react";
 import { updateMusicBand, type ParamsForUpdateMusicBand } from "~/api/MusicBands/UpdateMusicBand";
 import { Button } from "~/components/UI/Button/Button";
 import type { AlbumRequestUpdate } from "~/types/album/AlbumRequestUpdate";
@@ -14,7 +14,7 @@ import styles from "./MusicBandEditForm.module.scss";
 
 type Props = { musicBand: MusicBand; };
 
-export function MusicBandEditForm({ musicBand }: Readonly<Props>) {
+export function MusicBandEditForm({ musicBand }: Readonly<Props>): JSX.Element {
     const [name, setName] = useState<string>("");
 
     const [coordinatesX, setCoordinatesX] = useState<number | null>(null);

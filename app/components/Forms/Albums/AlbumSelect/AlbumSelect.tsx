@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type JSX } from "react";
 
 import { getWrapperListAlbum, type ParamsForGetWrapperListAlbum } from "~/api/Albums/GetAllAlbums";
 import { AlbumTableSelect } from "~/components/Tables/Album/AlbumTableSelect/AlbumTableSelect";
@@ -15,7 +15,7 @@ interface AlbumSelectProps {
     ) => void;
 }
 
-export function AlbumSelect({ onSelectAlbum }: Readonly<AlbumSelectProps>) {
+export function AlbumSelect({ onSelectAlbum }: Readonly<AlbumSelectProps>): JSX.Element {
     const [wrapperListAlbum, setWrapperListAlbum] = useState<WrapperListAlbum | null>(null);
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [page, setPage] = useState<number>(0);

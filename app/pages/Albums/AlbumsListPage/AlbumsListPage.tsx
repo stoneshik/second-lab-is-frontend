@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, type JSX } from "react";
 
 import { getWrapperListAlbum, type ParamsForGetWrapperListAlbum } from "~/api/Albums/GetAllAlbums";
 import { AlbumCreateForm } from "~/components/Forms/Albums/AlbumCreateForm/AlbumCreateForm";
+import { Header } from "~/components/Header/Header";
 import { AlbumTable } from "~/components/Tables/Album/AlbumTable/AlbumTable";
 import { Button } from "~/components/UI/Button/Button";
 import type { WrapperListAlbum } from "~/types/album/WrapperListAlbum";
@@ -57,6 +58,8 @@ export default function AlbumsListPage(): JSX.Element {
     const handleNextPage = (): void => setPage((p) => Math.min((totalPages - 1), p + 1));
 
     return (
+        <>
+        <Header />
         <div className={styles.wrapper}>
             <h1>Музыкальные альбомы</h1>
             <h2>Всего найдено: {totalElements}</h2>
@@ -89,5 +92,6 @@ export default function AlbumsListPage(): JSX.Element {
 
             {albums && <AlbumCreateForm />}
         </div>
+        </>
     );
 }

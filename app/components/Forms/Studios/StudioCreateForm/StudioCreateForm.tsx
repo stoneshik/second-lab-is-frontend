@@ -1,10 +1,10 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, type JSX } from "react";
 import { createStudio, type ParamsForCreateStudio } from "~/api/Studios/CreateStudio";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import styles from "./StudioCreateForm.module.scss";
 
-export function StudioCreateForm() {
+export function StudioCreateForm(): JSX.Element {
     const [name, setName] = useState<string>("");
     const [address, setAddress] = useState<string>("");
     const [loading, setLoading] = useState(false);
