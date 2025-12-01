@@ -4,12 +4,13 @@ import { useParams } from "react-router-dom";
 import { deleteAlbum } from "~/api/Albums/DeleteAlbum";
 import { getAlbumById, type ParamsForGetAlbumId } from "~/api/Albums/GetAlbumById";
 import { AlbumEditForm } from "~/components/Forms/Albums/AlbumEditForm/AlbumEditForm";
+import { Header } from "~/components/Header/Header";
 import { AlbumTable } from "~/components/Tables/Album/AlbumTable/AlbumTable";
 import { Button } from "~/components/UI/Button/Button";
+import { tokenService } from "~/services/tokenService";
 import type { Album } from "~/types/album/Album";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import styles from "./AlbumByIdPage.module.scss";
-import { Header } from "~/components/Header/Header";
 
 export default function AlbumByIdPage(): JSX.Element {
     const { id } = useParams<{ id: string }>();
@@ -34,6 +35,9 @@ export default function AlbumByIdPage(): JSX.Element {
     );
 
     useEffect(() => {
+        if (tokenService.isEmpty()) {
+            globalThis.location.assign("/login");
+        }
         let mounted = true;
         const fetchData = async () => {
             if (!mounted) return;

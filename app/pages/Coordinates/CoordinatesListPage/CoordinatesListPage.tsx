@@ -8,6 +8,7 @@ import { Button } from "~/components/UI/Button/Button";
 import type { WrapperListCoordinates } from "~/types/coordinates/WrapperListCoordinates";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import styles from "./CoordinatesListPage.module.scss";
+import { tokenService } from "~/services/tokenService";
 
 export default function CoordinatesListPage(): JSX.Element {
     const [wrapperListCoordinates, setWrapperListCoordinates] = useState<WrapperListCoordinates | null>(null);
@@ -32,6 +33,9 @@ export default function CoordinatesListPage(): JSX.Element {
     );
 
     useEffect(() => {
+        if (tokenService.isEmpty()) {
+            globalThis.location.assign("/login");
+        }
         let mounted = true;
         let intervalId: NodeJS.Timeout;
         const fetchData = async () => {

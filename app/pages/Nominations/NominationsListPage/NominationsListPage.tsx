@@ -5,6 +5,7 @@ import { NominationCreateForm } from "~/components/Forms/Nominations/NominationC
 import { Header } from "~/components/Header/Header";
 import { NominationTable } from "~/components/Tables/Nomination/NominationTable/NominationTable";
 import { Button } from "~/components/UI/Button/Button";
+import { tokenService } from "~/services/tokenService";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import type { WrapperListNomination } from "~/types/nomination/WrapperListNomination";
 import styles from "./NominationsListPage.module.scss";
@@ -32,6 +33,9 @@ export default function NominationsListPage(): JSX.Element {
     );
 
     useEffect(() => {
+        if (tokenService.isEmpty()) {
+            globalThis.location.assign("/login");
+        }
         let mounted = true;
         let intervalId: NodeJS.Timeout;
         const fetchData = async () => {

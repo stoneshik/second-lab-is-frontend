@@ -7,6 +7,7 @@ import { StudioEditForm } from "~/components/Forms/Studios/StudioEditForm/Studio
 import { Header } from "~/components/Header/Header";
 import { StudioTable } from "~/components/Tables/Studio/StudioTable/StudioTable";
 import { Button } from "~/components/UI/Button/Button";
+import { tokenService } from "~/services/tokenService";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import type { Studio } from "~/types/studio/Studio";
 import styles from "./StudioByIdPage.module.scss";
@@ -34,6 +35,9 @@ export default function StudioByIdPage(): JSX.Element {
     );
 
     useEffect(() => {
+        if (tokenService.isEmpty()) {
+            globalThis.location.assign("/login");
+        }
         let mounted = true;
         let intervalId: NodeJS.Timeout;
         const fetchData = async () => {

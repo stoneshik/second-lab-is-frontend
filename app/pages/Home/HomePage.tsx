@@ -5,6 +5,7 @@ import { getWrapperListMusicBand } from "~/api/MusicBands/GetAllMusicBands";
 import { Header } from "~/components/Header/Header";
 import { MusicBandTable } from "~/components/Tables/MusicBand/MusicBandTable/MusicBandTable";
 import { Button } from "~/components/UI/Button/Button";
+import { tokenService } from "~/services/tokenService";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import type { WrapperListMusicBand } from "~/types/musicBand/WrapperListMusicBand";
 import { MusicGenre, MusicGenreDictionary } from "~/types/MusicGenre";
@@ -43,6 +44,9 @@ export default function HomePage(): JSX.Element {
     );
 
     useEffect(() => {
+        if (tokenService.isEmpty()) {
+            globalThis.location.assign("/login");
+        }
         let mounted = true;
         let intervalId: NodeJS.Timeout;
         const fetchData = async () => {

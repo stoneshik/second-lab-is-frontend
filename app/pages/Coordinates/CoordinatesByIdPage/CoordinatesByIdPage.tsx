@@ -10,6 +10,7 @@ import { Button } from "~/components/UI/Button/Button";
 import type { Coordinates } from "~/types/coordinates/Coordinates";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import styles from "./CoordinatesByIdPage.module.scss";
+import { tokenService } from "~/services/tokenService";
 
 export default function CoordinatesByIdPage(): JSX.Element {
     const { id } = useParams<{ id: string }>();
@@ -34,6 +35,9 @@ export default function CoordinatesByIdPage(): JSX.Element {
     );
 
     useEffect(() => {
+        if (tokenService.isEmpty()) {
+            globalThis.location.assign("/login");
+        }
         let mounted = true;
         let intervalId: NodeJS.Timeout;
         const fetchData = async () => {

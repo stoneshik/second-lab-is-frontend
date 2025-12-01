@@ -9,6 +9,7 @@ import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import type { Nomination } from "~/types/nomination/Nomination";
 import styles from "./NominationByIdPage.module.scss";
+import { tokenService } from "~/services/tokenService";
 
 export default function NominationByIdPage(): JSX.Element {
     const { id } = useParams<{ id: string }>();
@@ -33,6 +34,9 @@ export default function NominationByIdPage(): JSX.Element {
     );
 
     useEffect(() => {
+        if (tokenService.isEmpty()) {
+            globalThis.location.assign("/login");
+        }
         let mounted = true;
         let intervalId: NodeJS.Timeout;
         const fetchData = async () => {

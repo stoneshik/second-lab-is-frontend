@@ -92,7 +92,7 @@ export function RegisterForm(): JSX.Element {
                     <input
                         id="password"
                         className={styles.input}
-                        type="text"
+                        type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         disabled={loading}

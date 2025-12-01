@@ -5,6 +5,7 @@ import { StudioCreateForm } from "~/components/Forms/Studios/StudioCreateForm/St
 import { Header } from "~/components/Header/Header";
 import { StudioTable } from "~/components/Tables/Studio/StudioTable/StudioTable";
 import { Button } from "~/components/UI/Button/Button";
+import { tokenService } from "~/services/tokenService";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import type { WrapperListStudio } from "~/types/studio/WrapperListStudio";
 import styles from "./StudiosListPage.module.scss";
@@ -32,6 +33,9 @@ export default function StudiosListPage(): JSX.Element {
     );
 
     useEffect(() => {
+        if (tokenService.isEmpty()) {
+            globalThis.location.assign("/login");
+        }
         let mounted = true;
         let intervalId: NodeJS.Timeout;
         const fetchData = async () => {

@@ -5,6 +5,7 @@ import { AlbumCreateForm } from "~/components/Forms/Albums/AlbumCreateForm/Album
 import { Header } from "~/components/Header/Header";
 import { AlbumTable } from "~/components/Tables/Album/AlbumTable/AlbumTable";
 import { Button } from "~/components/UI/Button/Button";
+import { tokenService } from "~/services/tokenService";
 import type { WrapperListAlbum } from "~/types/album/WrapperListAlbum";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import styles from "./AlbumsListPage.module.scss";
@@ -32,6 +33,9 @@ export default function AlbumsListPage(): JSX.Element {
     );
 
     useEffect(() => {
+        if (tokenService.isEmpty()) {
+            globalThis.location.assign("/login");
+        }
         let mounted = true;
         let intervalId: NodeJS.Timeout;
         const fetchData = async () => {

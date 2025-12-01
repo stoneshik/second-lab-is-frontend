@@ -1,6 +1,9 @@
 const ACCESS_TOKEN_KEY = "accessToken";
 
 export const tokenService = {
+    isEmpty(): boolean {
+        return localStorage.getItem(ACCESS_TOKEN_KEY) === null;
+    },
     get(): string | null {
         return localStorage.getItem(ACCESS_TOKEN_KEY);
     },
