@@ -1,9 +1,13 @@
 import { api } from "~/lib/axios";
+import { tokenService } from "~/services/tokenService";
 import { isErrorMessage } from "~/types/ErrorMessage";
+import type { MessageResponseDto } from "~/types/MessageResponseDto";
 
-export const logoutUser = async (): Promise<void> => {
+export const logoutUser = async (): Promise<MessageResponseDto> => {
     try {
-        await api.post("/auth/logout");
+        const response = await api.post("/auth/logout");
+        tokenService.remove();
+        return response.data as MessageResponseDto;
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {
             // @ts-ignore
