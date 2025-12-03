@@ -15,7 +15,14 @@ export const loginUser = async (params: ParamsForLoginUser): Promise<void> => {
             password: params.password,
         });
         const responseData: JwtResponseDto = response.data;
-        tokenService.set(responseData.token);
+        if (responseData?.token && responseData?.id) {
+            tokenService.set({
+                accessToken: responseData.token,
+                userId: responseData.id
+            });
+        } else {
+            throw new Error("Некорректный ответ от сервера");
+        }
     } catch (error) {
         if (error && typeof error === "object" && "response" in error) {
             // @ts-ignore

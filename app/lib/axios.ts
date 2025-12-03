@@ -8,9 +8,9 @@ export const api = axios.create({
 
 // Добавляем access token в каждый запрос
 api.interceptors.request.use(config => {
-    const token = tokenService.get();
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+    const credentials = tokenService.get();
+    if (credentials?.accessToken) {
+        config.headers.Authorization = `Bearer ${credentials.accessToken}`;
     }
     return config;
 });
