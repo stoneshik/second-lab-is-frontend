@@ -2,7 +2,7 @@ import axios, { AxiosError, type AxiosProgressEvent } from 'axios';
 import React, { useRef, useState, type ChangeEvent, type JSX } from 'react';
 import { baseURL } from '~/lib/axios';
 import { tokenService } from '~/services/tokenService';
-import './CsvUploadForm.module.scss';
+import './CsvUploadForm.scss';
 
 interface UploadResponse {
     message: string;
@@ -18,7 +18,6 @@ interface UploadProgress {
 }
 
 export function CsvUploadForm(): JSX.Element {
-    // Состояния компонента
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle');
     const [uploadProgress, setUploadProgress] = useState<UploadProgress>({ loaded: 0, total: 0, percentage: 0 });
@@ -27,12 +26,10 @@ export function CsvUploadForm(): JSX.Element {
     const [importStats, setImportStats] = useState<{ importedCount?: number; errors?: string[] }>({});
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    // Обработчик выбора файла
     const handleFileSelect = (event: ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
         if (!files || files.length === 0) return;
         const file = files[0];
-        // Валидация файла
         if (!validateFile(file)) {
             return;
         }
@@ -42,30 +39,29 @@ export function CsvUploadForm(): JSX.Element {
         setSuccessMessage('');
         setImportStats({});
     };
-
-    // Валидация файла
     const validateFile = (file: File): boolean => {
-        // Проверка типа файла
-        const allowedExtensions = ['.csv', 'text/csv'];
+        const allowedExtensions = new Set<string>(['.csv', 'text/csv']);
         const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
-        if (!allowedExtensions.includes(fileExtension) && !allowedExtensions.includes(file.type)) {
+        if (!allowedExtensions.has(fileExtension) && !allowedExtensions.has(file.type)) {
             setErrorMessage('Пожалуйста, выберите файл в формате CSV (.csv)');
             setSelectedFile(null);
-            if (fileInputRef.current) fileInputRef.current.value = '';
+            if (fileInputRef.current) {
+                fileInputRef.current.value = '';
                 return false;
+            }
         }
-        // Проверка размера файла (максимум 100MB)
-        const maxSize = 100 * 1024 * 1024; // 100MB в байтах
+        const MB_100 = 100 * 1024 * 1024;
+        const maxSize = MB_100;
         if (file.size > maxSize) {
             setErrorMessage(`Файл слишком большой. Максимальный размер: 100MB`);
             setSelectedFile(null);
-            if (fileInputRef.current) fileInputRef.current.value = '';
+            if (fileInputRef.current) {
+                fileInputRef.current.value = '';
                 return false;
+            }
         }
         return true;
     };
-
-    // Обработчик отправки формы
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         if (!selectedFile) {
@@ -76,7 +72,6 @@ export function CsvUploadForm(): JSX.Element {
         setErrorMessage('');
         setSuccessMessage('');
         setUploadProgress({ loaded: 0, total: selectedFile.size, percentage: 0 });
-        // Создаем FormData для отправки файла
         const formData = new FormData();
         formData.append('file', selectedFile);
         const credentials = tokenService.get();
@@ -85,7 +80,6 @@ export function CsvUploadForm(): JSX.Element {
         }
         formData.append('userId', credentials.userId.toString());
         try {
-            // Отправляем файл на сервер
             const response = await axios.post<UploadResponse>(
                 `${baseURL}/api/v1/insertion/csv`,
                 formData,
@@ -96,57 +90,47 @@ export function CsvUploadForm(): JSX.Element {
                     },
                     onUploadProgress: (progressEvent: AxiosProgressEvent) => {
                         if (progressEvent.total) {
-                        const percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                        setUploadProgress({
-                            loaded: progressEvent.loaded,
-                            total: progressEvent.total,
-                            percentage
-                        });
+                            const percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                            setUploadProgress({
+                                loaded: progressEvent.loaded,
+                                total: progressEvent.total,
+                                percentage
+                            });
                         }
                     },
+                    withCredentials: true
                 }
             );
-            // Обработка успешного ответа
             setUploadStatus('success');
             setSuccessMessage(response.data.message);
-            // Сохраняем статистику импорта
             setImportStats({
                 importedCount: response.data.importedCount,
                 errors: response.data.errors
             });
-            // Сброс выбранного файла
             setSelectedFile(null);
-                if (fileInputRef.current) fileInputRef.current.value = '';
+            if (fileInputRef.current) {
+                fileInputRef.current.value = '';
+            }
         } catch (error) {
             setUploadStatus('error');
-            // Обработка различных типов ошибок
             if (axios.isAxiosError(error)) {
                 const axiosError = error as AxiosError<UploadResponse>;
                 if (axiosError.response) {
-                // Сервер ответил с ошибкой
-                const serverError = axiosError.response.data;
-                setErrorMessage(serverError.message || `Ошибка сервера: ${axiosError.response.status}`);
-                // Сохраняем ошибки валидации если есть
-                if (serverError.errors) {
-                    setImportStats({
-                    errors: serverError.errors
-                    });
-                }
+                    const serverError = axiosError.response.data;
+                    setErrorMessage(serverError.message || `Ошибка сервера: ${axiosError.response.status}`);
+                    if (serverError.errors) {
+                        setImportStats({errors: serverError.errors});
+                    }
                 } else if (axiosError.request) {
-                // Запрос был сделан, но ответ не получен
-                setErrorMessage('Не удалось соединиться с сервером. Проверьте подключение к интернету.');
+                    setErrorMessage('Не удалось соединиться с сервером. Проверьте подключение к интернету.');
                 } else {
-                // Ошибка в настройке запроса
-                setErrorMessage('Ошибка при отправке запроса: ' + axiosError.message);
+                    setErrorMessage('Ошибка при отправке запроса: ' + axiosError.message);
                 }
             } else {
-                // Неизвестная ошибка
                 setErrorMessage('Неизвестная ошибка при загрузке файла');
             }
         }
     };
-
-    // Обработчик отмены загрузки
     const handleCancel = () => {
         setSelectedFile(null);
         setUploadStatus('idle');
@@ -158,8 +142,6 @@ export function CsvUploadForm(): JSX.Element {
             fileInputRef.current.value = '';
         }
     };
-
-    // Форматирование размера файла
     const formatFileSize = (bytes: number): string => {
         if (bytes === 0) return '0 Bytes';
         const k = 1024;
@@ -167,99 +149,95 @@ export function CsvUploadForm(): JSX.Element {
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return Number.parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     };
-
     return (
         <div className="csv-upload-container">
         <div className="csv-upload-card">
-            <h2 className="upload-title">📤 Импорт CSV файла</h2>
+            <h2 className="upload-title">Импорт музыкальных объектов из CSV файла</h2>
             <p className="upload-subtitle">
-            Загрузите CSV файл с данными музыкальных групп для импорта в базу данных
+                Загрузите CSV файл с данными музыкальных групп для импорта в базу данных
             </p>
             <form onSubmit={handleSubmit} className="upload-form">
-            {/* Поле выбора файла */}
-            <div className="file-input-container">
-                <label htmlFor="csv-file" className="file-input-label">
-                <div className="file-input-area">
-                    <div className="upload-icon">📁</div>
-                    <div className="file-input-text">
-                    <p className="file-input-title">
-                        {selectedFile ? selectedFile.name : 'Выберите CSV файл'}
-                    </p>
-                    <p className="file-input-hint">
-                        {selectedFile
-                        ? `Размер: ${formatFileSize(selectedFile.size)}`
-                        : 'Нажмите для выбора файла или перетащите сюда'
-                        }
-                    </p>
+                {/* Поле выбора файла */}
+                <div className="file-input-container">
+                    <label htmlFor="csv-file" className="file-input-label">
+                    <div className="file-input-area">
+                        <div className="upload-icon">📁</div>
+                        <div className="file-input-text">
+                        <p className="file-input-title">
+                            {selectedFile ? selectedFile.name : 'Выберите CSV файл'}
+                        </p>
+                        <p className="file-input-hint">
+                            {selectedFile
+                            ? `Размер: ${formatFileSize(selectedFile.size)}`
+                            : 'Нажмите для выбора файла или перетащите сюда'
+                            }
+                        </p>
+                        </div>
                     </div>
+                    <input
+                        ref={fileInputRef}
+                        id="csv-file"
+                        type="file"
+                        accept=".csv,text/csv"
+                        onChange={handleFileSelect}
+                        className="file-input-hidden"
+                        disabled={uploadStatus === 'uploading'}/>
+                    </label>
                 </div>
-                <input
-                    ref={fileInputRef}
-                    id="csv-file"
-                    type="file"
-                    accept=".csv,text/csv"
-                    onChange={handleFileSelect}
-                    className="file-input-hidden"
-                    disabled={uploadStatus === 'uploading'}
-                />
-                </label>
-            </div>
-            {/* Информация о файле */}
-            {selectedFile && (
-                <div className="file-info">
-                <div className="file-info-row">
-                    <span className="file-info-label">Файл:</span>
-                    <span className="file-info-value">{selectedFile.name}</span>
+                {/* Информация о файле */}
+                {selectedFile && (
+                    <div className="file-info">
+                        <div className="file-info-row">
+                            <span className="file-info-label">Файл:</span>
+                            <span className="file-info-value">{selectedFile.name}</span>
+                        </div>
+                        <div className="file-info-row">
+                            <span className="file-info-label">Размер:</span>
+                            <span className="file-info-value">{formatFileSize(selectedFile.size)}</span>
+                        </div>
+                        <div className="file-info-row">
+                            <span className="file-info-label">Тип:</span>
+                            <span className="file-info-value">{selectedFile.type || 'text/csv'}</span>
+                        </div>
+                    </div>
+                )}
+                {/* Прогресс-бар загрузки */}
+                {uploadStatus === 'uploading' && (
+                    <div className="upload-progress">
+                        <div className="progress-bar-container">
+                            <div
+                                className="progress-bar-fill"
+                                style={{ width: `${uploadProgress.percentage}%` }}/>
+                        </div>
+                        <div className="progress-info">
+                            <span>Загрузка: {uploadProgress.percentage}%</span>
+                            <span>
+                            {formatFileSize(uploadProgress.loaded)} / {formatFileSize(uploadProgress.total)}
+                            </span>
+                        </div>
+                    </div>
+                )}
+                {/* Кнопки действия */}
+                <div className="form-actions">
+                    <button
+                        type="button"
+                        onClick={handleCancel}
+                        className="btn btn-secondary"
+                        disabled={uploadStatus === 'uploading'}>
+                        Отмена
+                    </button>
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled={!selectedFile || uploadStatus === 'uploading'}>
+                    {uploadStatus === 'uploading' ? (
+                        <>
+                        <span className="spinner"></span>
+                        Загрузка...
+                        </>
+                    ) : 'Загрузить файл'}
+                    </button>
                 </div>
-                <div className="file-info-row">
-                    <span className="file-info-label">Размер:</span>
-                    <span className="file-info-value">{formatFileSize(selectedFile.size)}</span>
-                </div>
-                <div className="file-info-row">
-                    <span className="file-info-label">Тип:</span>
-                    <span className="file-info-value">{selectedFile.type || 'text/csv'}</span>
-                </div>
-                </div>
-            )}
-            {/* Прогресс-бар загрузки */}
-            {uploadStatus === 'uploading' && (
-                <div className="upload-progress">
-                <div className="progress-bar-container">
-                    <div
-                    className="progress-bar-fill"
-                    style={{ width: `${uploadProgress.percentage}%` }}
-                    />
-                </div>
-                <div className="progress-info">
-                    <span>Загрузка: {uploadProgress.percentage}%</span>
-                    <span>
-                    {formatFileSize(uploadProgress.loaded)} / {formatFileSize(uploadProgress.total)}
-                    </span>
-                </div>
-                </div>
-            )}
-            {/* Кнопки действия */}
-            <div className="form-actions">
-                <button
-                    type="button"
-                    onClick={handleCancel}
-                    className="btn btn-secondary"
-                    disabled={uploadStatus === 'uploading'}>
-                Отмена
-                </button>
-                <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={!selectedFile || uploadStatus === 'uploading'}
-                >
-                {uploadStatus === 'uploading' ? (
-                    <>
-                    <span className="spinner"></span>
-                    Загрузка...
-                    </>
-                ) : 'Загрузить файл'}
-                </button>
-            </div>
             </form>
             {/* Сообщение об ошибке */}
             {errorMessage && (
@@ -279,22 +257,10 @@ export function CsvUploadForm(): JSX.Element {
                 </div>
             </div>
             )}
-            {/* Статистика импорта */}
-            {importStats.importedCount !== undefined && (
-            <div className="import-stats">
-                <h3>📊 Результаты импорта</h3>
-                <div className="stats-grid">
-                <div className="stat-card">
-                    <div className="stat-value">{importStats.importedCount}</div>
-                    <div className="stat-label">Записей импортировано</div>
-                </div>
-                </div>
-            </div>
-            )}
             {/* Список ошибок импорта */}
             {importStats.errors && importStats.errors.length > 0 && (
             <div className="import-errors">
-                <h3>⚠️ Ошибки при импорте</h3>
+                <h3>Ошибки при импорте</h3>
                 <div className="errors-list">
                 {importStats.errors.slice(0, 10).map((error, index) => (
                     <div key={index} className="error-item">
@@ -312,18 +278,13 @@ export function CsvUploadForm(): JSX.Element {
             )}
             {/* Подсказка по формату CSV */}
             <div className="format-hint">
-            <h4>📝 Требования к CSV файлу:</h4>
-            <ul>
-                <li>Разделитель: точка с запятой (;)</li>
-                <li>Кодировка: UTF-8</li>
-                <li>Заголовки столбцов в первой строке</li>
-                <li>Максимальный размер файла: 100MB</li>
-            </ul>
-            <div className="sample-link">
-                <a href={`${baseURL}/api/import/csv-sample`} download>
-                📥 Скачать пример CSV файла
-                </a>
-            </div>
+                <h4>Требования к CSV файлу:</h4>
+                <ul>
+                    <li>Разделитель: точка с запятой (;)</li>
+                    <li>Кодировка: UTF-8</li>
+                    <li>Заголовки столбцов в первой строке</li>
+                    <li>Максимальный размер файла: 100MB</li>
+                </ul>
             </div>
         </div>
         </div>
