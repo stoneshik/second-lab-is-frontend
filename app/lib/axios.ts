@@ -1,8 +1,10 @@
 import axios from "axios";
 import { tokenService } from "~/services/tokenService";
 
+export const baseURL: string = import.meta.env.URL_HOST_API_FOR_FRONTEND || "http://localhost:8080";
+
 export const api = axios.create({
-    baseURL: import.meta.env.URL_HOST_API_FOR_FRONTEND || "http://localhost:8080",
+    baseURL: baseURL,
     withCredentials: true,
 });
 

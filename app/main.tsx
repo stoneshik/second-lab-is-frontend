@@ -21,6 +21,7 @@ import NominationByIdPage from "./pages/Nominations/NominationByIdPage/Nominatio
 import NominationsListPage from "./pages/Nominations/NominationsListPage/NominationsListPage";
 
 import "~/styles/globals.scss";
+import InsertionPage from "./pages/Insertion/InsertionPage";
 import LoginPage from "./pages/Users/LoginPage/LoginPage";
 import LogoutPage from "./pages/Users/LogoutPage/LogoutPage";
 import RegisterPage from "./pages/Users/RegisterPage/RegisterPage";
@@ -40,6 +41,8 @@ root.render(
 
                 <Route path="music-bands" element={<MusicBandsListPage />} />
                 <Route path="music-bands/:id" element={<MusicBandByIdPage />} />
+
+                <Route path="insertion" element={<InsertionPage />} />
 
                 <Route path="coordinates" element={<CoordinatesListPage />} />
                 <Route path="coordinates/:id" element={<CoordinateByIdPage />} />

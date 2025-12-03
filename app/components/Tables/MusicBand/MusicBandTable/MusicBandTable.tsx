@@ -18,6 +18,7 @@ export const MusicBandTable = ({ musicBands } : MusicBandTableProps): JSX.Elemen
                     <th>Жанр</th>
                     <th>Участники</th>
                     <th>Синглы</th>
+                    <th>Альбомы</th>
                     <th>Время создания</th>
                     <th>Дата основания</th>
                     <th>Описание</th>
@@ -43,6 +44,7 @@ export const MusicBandTable = ({ musicBands } : MusicBandTableProps): JSX.Elemen
                         <td>{(band.genre === null)? "-" : MusicGenreDictionary[band.genre]}</td>
                         <td>{band.numberOfParticipants ?? "-"}</td>
                         <td>{band.singlesCount ?? "-"}</td>
+                        <td>{band.albumsCount}</td>
                         <td>{new Date(band.creationDate).toLocaleString("ru-RU")}</td>
                         <td>{new Date(band.establishmentDate).toLocaleDateString("ru-RU")}</td>
                         <td>{band.description || "-"}</td>
