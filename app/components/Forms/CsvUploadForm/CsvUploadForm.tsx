@@ -211,7 +211,7 @@ export function CsvUploadForm(): JSX.Element {
                                 style={{ width: `${uploadProgress.percentage}%` }}/>
                         </div>
                         <div className="progress-info">
-                            <span>Данные импортируются: {uploadProgress.percentage}%</span>
+                            <span>Загрузка: {uploadProgress.percentage}%</span>
                             <span>
                             {formatFileSize(uploadProgress.loaded)} / {formatFileSize(uploadProgress.total)}
                             </span>
@@ -234,7 +234,7 @@ export function CsvUploadForm(): JSX.Element {
                     {uploadStatus === 'uploading' ? (
                         <>
                         <span className="spinner"></span>
-                        Загрузка...
+                        Данные импортируются...
                         </>
                     ) : 'Загрузить файл'}
                     </button>
