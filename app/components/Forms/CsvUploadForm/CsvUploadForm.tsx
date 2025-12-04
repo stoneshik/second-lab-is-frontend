@@ -162,16 +162,16 @@ export function CsvUploadForm(): JSX.Element {
                     <label htmlFor="csv-file" className="file-input-label">
                     <div className="file-input-area">
                         <div className="upload-icon">📁</div>
-                        <div className="file-input-text">
-                        <p className="file-input-title">
-                            {selectedFile ? selectedFile.name : 'Выберите CSV файл'}
-                        </p>
-                        <p className="file-input-hint">
-                            {selectedFile
-                            ? `Размер: ${formatFileSize(selectedFile.size)}`
-                            : 'Нажмите для выбора файла или перетащите сюда'
-                            }
-                        </p>
+                            <div className="file-input-text">
+                            <p className="file-input-title">
+                                {selectedFile ? selectedFile.name : 'Выберите CSV файл'}
+                            </p>
+                            <p className="file-input-hint">
+                                {selectedFile
+                                ? `Размер: ${formatFileSize(selectedFile.size)}`
+                                : 'Нажмите для выбора файла или перетащите сюда'
+                                }
+                            </p>
                         </div>
                     </div>
                     <input

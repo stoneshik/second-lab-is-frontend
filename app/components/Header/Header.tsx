@@ -39,7 +39,7 @@ export function Header(): JSX.Element {
                         Муз. группы
                     </NavLink>
                     <NavLink to="/insertion" className={linkClass} onClick={closeMenu}>
-                        Вставка
+                        Импорт
                     </NavLink>
                     <NavLink to="/coordinates" className={linkClass} onClick={closeMenu}>
                         Координаты

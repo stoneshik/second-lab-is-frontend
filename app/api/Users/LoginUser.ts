@@ -15,10 +15,11 @@ export const loginUser = async (params: ParamsForLoginUser): Promise<void> => {
             password: params.password,
         });
         const responseData: JwtResponseDto = response.data;
-        if (responseData?.token && responseData?.id) {
+        if (responseData?.token && responseData?.id && responseData?.roles) {
             tokenService.set({
                 accessToken: responseData.token,
-                userId: responseData.id
+                userId: responseData.id,
+                roles: responseData.roles
             });
         } else {
             throw new Error("Некорректный ответ от сервера");
