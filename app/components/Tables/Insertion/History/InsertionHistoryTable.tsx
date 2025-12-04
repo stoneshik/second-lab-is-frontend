@@ -24,8 +24,8 @@ export const InsertionHistoryTable = ({ insertionHistories } : InsertionHistoryT
                 (insertionHistory) => (
                     <tr key={insertionHistory.id}>
                         <td>{insertionHistory.id}</td>
-                        <td>{insertionHistory.creationDate}</td>
-                        <td>{insertionHistory.endDate}</td>
+                        <td>{new Date(insertionHistory.creationDate).toLocaleString("ru-RU")}</td>
+                        <td>{new Date(insertionHistory.endDate).toLocaleString("ru-RU")}</td>
                         <td>{InsertionHistoryStatusDictionary[insertionHistory.status]}</td>
                         <td>{insertionHistory.numberObjects}</td>
                     </tr>
