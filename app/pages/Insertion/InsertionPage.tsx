@@ -15,7 +15,7 @@ export default function InsertionPage(): JSX.Element {
     const [wrapperListInsertionHistory, setWrapperListInsertionHistory] = useState<WrapperListInsertionHistory | null>(null);
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [page, setPage] = useState<number>(0);
-    const [size, setSize] = useState<number>(1);
+    const [size, setSize] = useState<number>(10);
 
     const loadByAdmin = useCallback(
         async (params: ParamsForGetAllHistoriesByAdmin) => {
