@@ -50,8 +50,8 @@ export function CsvUploadForm(): JSX.Element {
                 return false;
             }
         }
-        const MB_100 = 100 * 1024 * 1024;
-        const maxSize = MB_100;
+        const MB_250 = 250 * 1024 * 1024;
+        const maxSize = MB_250;
         if (file.size > maxSize) {
             setErrorMessage(`Файл слишком большой. Максимальный размер: 100MB`);
             setSelectedFile(null);
