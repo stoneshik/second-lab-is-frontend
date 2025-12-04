@@ -16,6 +16,7 @@ export const InsertionHistoryTable = ({ insertionHistories } : InsertionHistoryT
                     <th>Дата создания</th>
                     <th>Дата завершения</th>
                     <th>Статус</th>
+                    <th>Пользователь</th>
                     <th>Количество импортированных строк</th>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@ export const InsertionHistoryTable = ({ insertionHistories } : InsertionHistoryT
                         <td>{new Date(insertionHistory.creationDate).toLocaleString("ru-RU")}</td>
                         <td>{new Date(insertionHistory.endDate).toLocaleString("ru-RU")}</td>
                         <td>{InsertionHistoryStatusDictionary[insertionHistory.status]}</td>
+                        <td>{insertionHistory.login}</td>
                         <td>{insertionHistory.numberObjects}</td>
                     </tr>
                 )

@@ -5,5 +5,6 @@ export interface InsertionHistory {
     creationDate: string;
     endDate: string;
     status: InsertionHistoryStatus;
+    login: string;
     numberObjects: number;
 }
