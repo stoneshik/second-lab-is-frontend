@@ -211,7 +211,7 @@ export function CsvUploadForm(): JSX.Element {
                                 style={{ width: `${uploadProgress.percentage}%` }}/>
                         </div>
                         <div className="progress-info">
-                            <span>Загрузка: {uploadProgress.percentage}%</span>
+                            <span>Данные импортируются: {uploadProgress.percentage}%</span>
                             <span>
                             {formatFileSize(uploadProgress.loaded)} / {formatFileSize(uploadProgress.total)}
                             </span>
