@@ -81,7 +81,7 @@ export const MusicBandSelectTable = (
                                 {`${band.bestAlbum.name} (${band.bestAlbum.length} сек)`}
                             </Link>
                         </td>}
-                        {band.studio === null && <td>-</td>}
+                        {band.bestAlbum === null && <td>-</td>}
                     </tr>
                 )
             )}
