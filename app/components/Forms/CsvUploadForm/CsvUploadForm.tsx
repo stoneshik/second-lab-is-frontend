@@ -76,6 +76,7 @@ export function CsvUploadForm(): JSX.Element {
         formData.append('file', selectedFile);
         const credentials = tokenService.get();
         if (credentials === null) {
+            setErrorMessage('Пользователь не авторизован');
             return;
         }
         formData.append('userId', credentials.userId.toString());

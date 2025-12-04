@@ -2,6 +2,11 @@ const ACCESS_TOKEN_KEY = "accessToken";
 const USER_ID_KEY = "userId";
 const ROLES_KEY = "roles";
 
+export enum ROLES {
+    USER = 'ROLE_USER',
+    ADMIN = 'ROLE_ADMIN',
+}
+
 export interface Credentials {
     accessToken: string;
     userId: number;
