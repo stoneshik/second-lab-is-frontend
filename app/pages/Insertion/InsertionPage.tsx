@@ -74,7 +74,7 @@ export default function InsertionPage(): JSX.Element {
             }
         };
         fetchData();
-        intervalId = setInterval(fetchData, 10_000);
+        intervalId = setInterval(fetchData, 2_000);
         return () => {
             mounted = false;
             clearInterval(intervalId);
